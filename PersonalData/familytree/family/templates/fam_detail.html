@@ -1,0 +1,109 @@
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>{{ family.name }}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
+
+    <!-- Bootstrap core CSS -->
+<link type="text/css" rel="stylesheet" href="{% static "bootstrap.css" %}">
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+<link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
+<meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+<meta name="theme-color" content="#999999">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      div.b {
+  position: absolute;
+  right: 500;
+  width: 100px;
+  height: 120px;
+        }
+      img {
+  width: 350px;
+  height: 450px;
+  object-fit: cover;
+}
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+  </head>
+<body>
+<main role="main">
+  <section class="jumbotron text-center">
+      <div class="card-panel teal lighten-2">
+    <div class="container">
+        <img src = "{% static family.linkimage %}"></img>
+        <h3>Name : {{ family.name }}</h3>
+        <h3>Email : {{ family.email_address }}</h3>
+        <h3>Birth Place : {{ family.birthplace }}</h3>
+        <h3>Residence : {{ family.residence }}</h3>
+        {% if spouseid %}
+        <h3>Children Name<p>
+            {% for a in children %}
+            <a href = "{%  url 'fam_detail' a.id %} class = "text-white bg-dark" style = "color:black">
+               {{ a.name }}
+             </a>
+            {% endfor %}
+        </p></h3>
+        {% endif %}
+        <h3><p>
+            {% if spouseid %}
+        <a href = "{% url 'fam_detail' spouseid%} class = "text-white bg-dark" style = "color:black">
+            Spouse Name : {{ family.spousename }}
+            {% endif %}
+        </a>
+        </p>
+        </h3>
+        <h3>Age : {{ family.age }}</h3><br>
+        <p>
+        <a href="mailto:nanjundaiah@gmail.com" class="btn btn-primary my-2">Email me</a>
+      </p>
+    </div>
+      </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+          {% for img in images %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+                <img src = "{% static img %}" height = 700/>
+          </div>
+        </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</main>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</html>

@@ -1,0 +1,6 @@
+<h1>{{ note }}</h1>
+<form action="{% url 'acknowledgement' %}" method = "post">
+    {% csrf_token %}
+    {{ familydata }}
+    <input type = "submit" value = "Submit">
+</form>
