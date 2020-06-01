@@ -1,5 +1,5 @@
 <h1>{{ note }}</h1>
-<form action="{% url 'acknowledgement' %}" method = "post">
+<form action="{% url 'edit_database' member.id %}" method = "post">
     {% csrf_token %}
     {{ familydata.as_p }}
     <input type = "submit" value = "Submit">

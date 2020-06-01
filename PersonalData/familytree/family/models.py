@@ -2,8 +2,16 @@ from django.db import models
 
 # Create your models here.
 
+class Tree(models.Model):
+    familyid = models.CharField(max_length=100,unique=True)
+    familyname = models.CharField(max_length=100)
+    linkingimage = models.CharField(max_length=120, default="na.jpeg", editable=True)
+    def __str__(self):
+        return self.familyname
+
 class Family(models.Model):
     SEX_CHOICES = [('M','Male'),('F','Female')]
+    familyid = models.ForeignKey('Tree',on_delete=models.CASCADE,related_name='familesid',to_field='familyid')
     name = models.CharField(max_length = 100)
     email_address = models.CharField(max_length = 100)
     birthplace = models.CharField(max_length = 40)

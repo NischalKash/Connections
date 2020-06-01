@@ -1,0 +1,7 @@
+<h1>{{ note }}</h1>
+<form action = "{% url "edit_data" %}" method = "post">
+        {% csrf_token %}
+    <label for = "ID">ID</label>
+    <input id = "ID" type="text" name="ID">
+    <input type = "submit" value = "Submit">
+</form>

@@ -4,12 +4,16 @@ from django.http import Http404
 from .models import Family
 from .models import Child
 from .forms import FamilyData
+from .models import Tree
 
 # Create your views here.
 
+def tree(request):
+    fam = Tree.objects.all()
+    return render(request,'tree.html',{'families':fam})
+
 def home(request):
     fam = Family.objects.all()
-    print(fam)
     return render(request,'home.html',{'family':fam})
 
 def fam_detail(request,id):
@@ -46,3 +50,27 @@ def acknowledgement(request):
         note = "Enter New Information"
         form = FamilyData()
         return render(request,'acknowledgement.html',{'familydata':form,'note':note})
+
+def edit_database(request, id):
+    note = "Edit the Following Information"
+    print(note)
+    print(type(id))
+    member = Family.objects.get(id=id)
+    form = FamilyData(instance=member)
+    if request.method=='POST':
+        filled_form = FamilyData(request.POST,instance = member)
+        if filled_form.is_valid():
+            filled_form.save()
+            note = "Thank You for Entering Information"
+    return render(request, 'edit.html', {'familydata': form, 'note': note, 'member':member})
+
+def edit_data(request):
+    if request.method == 'POST':
+        note = "Edit the Following Information"
+        id = request.POST.get("ID","")
+        member = Family.objects.get(id=id)
+        form = FamilyData(instance=member)
+        return render(request, 'edit.html', {'familydata': form, 'note': note, 'member': member})
+    else:
+        note = "Please Enter the id of the member to be edited"
+        return render(request, 'editdata.html', {'note': note})
