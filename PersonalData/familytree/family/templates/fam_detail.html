@@ -59,6 +59,20 @@
     <div class="container">
         <img src = "{% static family.linkimage %}"></img>
         <h3>Name : {{ family.name }}</h3>
+    {% if fatherid %}
+        <h3>
+        <a href = "{% url 'fam_detail' fatherid%}"  class = "text-white bg-dark" style = "color:black">
+            Father Name : {{ family.fathername }}
+        </a>
+        </h3>
+    {% endif %}
+    <h3>
+        {% if motherid %}
+        <a href = "{% url 'fam_detail' motherid%}"  class = "text-white bg-dark" style = "color:black">
+            Mother Name : {{ family.mothername }}
+        </a>
+            </h3>
+    {% endif %}
         <h3>Email : {{ family.email_address }}</h3>
         <h3>Birth Place : {{ family.birthplace }}</h3>
         <h3>Residence : {{ family.residence }}</h3>

@@ -13,6 +13,8 @@ class Family(models.Model):
     SEX_CHOICES = [('M','Male'),('F','Female')]
     familyid = models.ForeignKey('Tree',on_delete=models.CASCADE,related_name='familesid',to_field='familyid')
     name = models.CharField(max_length = 100)
+    fathername = models.CharField(max_length=100,default="Void")
+    mothername = models.CharField(max_length=100,default="Void" )
     email_address = models.CharField(max_length = 100)
     birthplace = models.CharField(max_length = 40)
     residence = models.CharField(max_length = 100)

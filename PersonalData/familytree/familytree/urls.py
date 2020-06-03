@@ -23,12 +23,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^$',views.home,name='home'),
-    
+    url(r'^$',views.tree,name='tree'),
+    url(r'^tree/(\d+)/',views.home,name='home'),
     url(r'^family/(\d+)/',views.fam_detail,name = 'fam_detail'),
+    url(r'^new',views.new,name='new'),
+    url(r'^childentry',views.childentry,name='childentry'),
     url(r'^acknowledgement',views.acknowledgement,name = 'acknowledgement'),
     url(r'editfamily/(\d+)/',views.edit_database,name='edit_database'),
-    url(r'edit_data',views.edit_data,name='edit_data')
+    url(r'edit_data',views.edit_data,name='edit_data'),
+    url(r'^connection',views.connection,name='connection'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
