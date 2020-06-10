@@ -10,3 +10,8 @@ class Data(forms.ModelForm):
     class Meta:
         model = Child
         fields = ['parentid','childid']
+
+class FamilyEntry(forms.ModelForm):
+    class Meta:
+        model = Tree
+        fields = ['familyid','loginname','password','familyname','linkingimage','email_address']

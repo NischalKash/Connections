@@ -60,10 +60,13 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Operations</h4>
           <ul class="list-unstyled">
-            <li><a href="{% url 'acknowledgement' %}" class="text-white">New</a></li>
-              <li><a href="{% url 'edit_data' %}" class="text-white">Update</a></li>
-              <li><a href="{% url 'connection' %}" class="text-white">Connection</a></li>
-          </ul>
+                          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'new' %}" class="btn btn-primary" role="button">New</a>
+              <a href="{% url 'newedit' %}" class="btn btn-primary" role="button">Update</a>
+              <a href="{% url 'delete' %}" class="btn btn-primary" role="button">Delete</a>
+              <a href="{% url 'connection' %}" class="btn btn-primary" role="button">Connection</a>
+                  <a href="{% url 'display' %}" class="btn btn-primary" role="button">Display</a>
+              </div></ul>
         </div>
       </div>
     </div>
@@ -87,11 +90,10 @@
   <section class="jumbotron text-center">
     <div class="container">
       <h1>La Familia</h1>
-        <img src = "{% static 'website.jpeg' %}" height = 600 ></img>
+        <img src = "{% static link %}" height = 600 ></img>
         <p class="lead text-muted"><b>When we have each other, we have everything!!</b></p>
       <p>
-        <a href="mailto:nischalkashyap.adm2019@gmail.com" class="btn btn-primary my-2">Email me</a>
-      </p>
+        <a href="{{ email }}" class="btn btn-primary my-2">Email me</a>
     </div>
   </section>
 </div>

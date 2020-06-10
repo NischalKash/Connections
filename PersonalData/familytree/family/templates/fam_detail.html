@@ -53,49 +53,88 @@
     <link href="album.css" rel="stylesheet">
   </head>
 <body>
+
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Database</h4>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Operations</h4>
+          <ul class="list-unstyled">
+                          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'new' %}" class="btn btn-primary" role="button">New</a>
+              <a href="{% url 'newedit' %}" class="btn btn-primary" role="button">Update</a>
+              <a href="{% url 'delete' %}" class="btn btn-primary" role="button">Delete</a>
+              <a href="{% url 'connection' %}" class="btn btn-primary" role="button">Connection</a>
+                  <a href="{% url 'display' %}" class="btn btn-primary" role="button">Display</a>
+              </div></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="{% url 'tree' %}" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <strong>Tasks</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
 <main role="main">
   <section class="jumbotron text-center">
       <div class="card-panel teal lighten-2">
     <div class="container">
         <img src = "{% static family.linkimage %}"></img>
-        <h3>Name : {{ family.name }}</h3>
+        <h4>
+                  <br>
+            Name : {{ family.name }}</h4>
     {% if fatherid %}
-        <h3>
-        <a href = "{% url 'fam_detail' fatherid%}"  class = "text-white bg-dark" style = "color:black">
-            Father Name : {{ family.fathername }}
+        <h4>Father Name :
+        <a href = "{% url 'fam_detail' fatherid%}  class = "text-white bg-dark" style = "color:black">
+             {{ family.fathername }}
         </a>
-        </h3>
+        </h4>
     {% endif %}
-    <h3>
-        {% if motherid %}
-        <a href = "{% url 'fam_detail' motherid%}"  class = "text-white bg-dark" style = "color:black">
-            Mother Name : {{ family.mothername }}
+    {% if motherid %}
+        <h4>Mother Name :
+        <a href = "{% url 'fam_detail' motherid%}  class = "text-white bg-dark" style = "color:black">
+             {{ family.mothername }}
         </a>
-            </h3>
+            </h4>
     {% endif %}
-        <h3>Email : {{ family.email_address }}</h3>
-        <h3>Birth Place : {{ family.birthplace }}</h3>
-        <h3>Residence : {{ family.residence }}</h3>
+        <h4>Birth Place : {{ family.birthplace }}</h4>
+        <h4>Residence : {{ family.residence }}</h4>
         {% if spouseid %}
-        <h3>Children Name<p>
+        <h4>Children Name :<br>
             {% for a in children %}
             <a href = "{%  url 'fam_detail' a.id %} class = "text-white bg-dark" style = "color:black">
                {{ a.name }}
              </a>
+                <br>
             {% endfor %}
-        </p></h3>
+        </h4>
         {% endif %}
-        <h3><p>
+        <h4>
+        Spouse Name :
             {% if spouseid %}
         <a href = "{% url 'fam_detail' spouseid%} class = "text-white bg-dark" style = "color:black">
-            Spouse Name : {{ family.spousename }}
+            {{ family.spousename }}
             {% endif %}
         </a>
-        </p>
-        </h3>
-        <h3>Age : {{ family.age }}</h3><br>
+        <br>
+          <a href = "{% url 'displayfamily' family.id%} class = "text-white bg-dark" style = "color:black">
+            Successor Tree
+        </a>
+        </h4>
+        <h4>Age : {{ family.age }}</h4><br>
         <p>
-        <a href="mailto:nanjundaiah@gmail.com" class="btn btn-primary my-2">Email me</a>
+        <a href="mailto:{{family.email_address}}" class="btn btn-primary my-2">Email me</a>
       </p>
     </div>
       </div>

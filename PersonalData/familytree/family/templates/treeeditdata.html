@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Connection</title>
+    <title>Update</title>
   </head>
   <body>
   <header>
@@ -49,12 +49,12 @@
 <div class="container"></div>
 
 <h1>{{ note }}</h1>
-<form action = "{% url "connection" %}" method = "post">
-    {% csrf_token %}
-    <label for = "First_Person">First Person Name</label>
-    <input id = "First_Person" type="text" name="First_Person">
-    <label for = "Second_Person">Second Person Name</label>
-    <input id = "Second_Person" type="text" name="Second_Person">
+<form action = "{% url "treeedit" %}" method = "post">
+        {% csrf_token %}
+    <label for = "loginname">Login Name</label>
+    <input id = "loginname" type="text" name="loginname">
+    <label for = "password">Password</label>
+    <input id = "password" type="password" name="password">
     <input type = "submit" value = "Submit">
 </form>
     <!-- Optional JavaScript -->

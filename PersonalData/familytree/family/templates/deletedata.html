@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Update</title>
+    <title>Delete</title>
   </head>
   <body>
   <header>
@@ -21,10 +21,13 @@
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Operations</h4>
           <ul class="list-unstyled">
-            <li><a href="{% url 'acknowledgement' %}" class="text-white">New</a></li>
-              <li><a href="{% url 'edit_data' %}" class="text-white">Update</a></li>
-              <li><a href="{% url 'connection' %}" class="text-white">Connection</a></li>
-          </ul>
+                          <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{% url 'new' %}" class="btn btn-primary" role="button">New</a>
+              <a href="{% url 'newedit' %}" class="btn btn-primary" role="button">Update</a>
+              <a href="{% url 'delete' %}" class="btn btn-primary" role="button">Delete</a>
+              <a href="{% url 'connection' %}" class="btn btn-primary" role="button">Connection</a>
+                  <a href="{% url 'display' %}" class="btn btn-primary" role="button">Display</a>
+              </div></ul>
         </div>
       </div>
     </div>
@@ -46,7 +49,7 @@
 <div class="container"></div>
 
 <h1>{{ note }}</h1>
-<form action = "{% url "edit_data" %}" method = "post">
+<form action = "{% url "delete" %}" method = "post">
         {% csrf_token %}
     <label for = "ID">ID</label>
     <input id = "ID" type="text" name="ID">

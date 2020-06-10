@@ -22,16 +22,25 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^treeedit_database/(\d+)/', views.treeedit_database, name='treeedit_database'),
     url('admin/', admin.site.urls),
     url(r'^$',views.tree,name='tree'),
     url(r'^tree/(\d+)/',views.home,name='home'),
     url(r'^family/(\d+)/',views.fam_detail,name = 'fam_detail'),
+    url(r'^newedit',views.newedit,name='newedit'),
     url(r'^new',views.new,name='new'),
     url(r'^childentry',views.childentry,name='childentry'),
-    url(r'^acknowledgement',views.acknowledgement,name = 'acknowledgement'),
+    url(r'^authenticate',views.authenticate,name = 'authenticate'),
+    url(r'^acknowledgement', views.acknowledgement, name='acknowledgement'),
     url(r'editfamily/(\d+)/',views.edit_database,name='edit_database'),
     url(r'edit_data',views.edit_data,name='edit_data'),
+    url(r'childedit', views.childedit, name='childedit'),
+    url(r'treeedit', views.treeedit, name='treeedit'),
     url(r'^connection',views.connection,name='connection'),
+    url(r'^delete',views.delete,name='delete'),
+    url(r'^familyentry',views.familyentry,name='familyentry'),
+    url(r'^displayfamily/(\d+)/',views.displayfamily, name = 'displayfamily'),
+    url(r'^display', views.display, name='display'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
