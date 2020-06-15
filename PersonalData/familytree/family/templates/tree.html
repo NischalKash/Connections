@@ -106,7 +106,7 @@
           {% for fam in family.all %}
         <div class="col-md-3">
           <div class="card mb-2 shadow-sm">
-                <img src = "{% static fam.linkingimage %}" height = 350/>
+                <img src = "{{ fam.linkingimage.url }}" height = 350/>
             <div class="card-body">
              <a href = "{% url 'home' fam.familyid%}" style="color:black;">
                  <h2>

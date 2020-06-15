@@ -1,9 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
-from .models import Family
-from .models import Child
-from .forms import FamilyData, Data, FamilyEntry
+from .models import Family, Child, Images
+from .forms import FamilyData, Data, FamilyEntry, ImagesUpload
 from .models import Tree
 
 # Create your views here.
@@ -19,12 +18,18 @@ def home(request, id):
         a = i.familyname
         b = i.email_address
         c = i.linkingimage
+    print("Holls",c)
     return render(request,'home.html',{'family':fam,'id':a,'email':b,'link':c})
 
 def fam_detail(request,id):
     identity = []
+
     try:
         fam = Family.objects.get(id=id)
+        images1 = list(Images.objects.all().filter(globalid=fam.globalid))
+        images = []
+        for i in images1:
+            images.append(images1[0].images.url)
         childarray = list(Child.objects.all().filter(parentid=id))
         child_id_dict = []
         for child in childarray:
@@ -50,7 +55,7 @@ def fam_detail(request,id):
             spouseval=0
     except fam.DoesNotExist:
         raise Http404('Object not found')
-    return render(request,'fam_detail.html',{'family':fam,'spouseid':spouseval,'images':fam.otherimages.split(','),'children':child_id_dict,'fatherid':fatherval,'motherid':motherval})
+    return render(request,'fam_detail.html',{'family':fam,'spouseid':spouseval,'images':images,'children':child_id_dict,'fatherid':fatherval,'motherid':motherval})
 
 def childentry(request):
     if request.method == 'POST':
@@ -67,8 +72,9 @@ def childentry(request):
 
 def familyentry(request):
     if request.method=='POST':
-        filled_form = FamilyEntry(request.POST)
+        filled_form = FamilyEntry(request.POST, request.FILES)
         if filled_form.is_valid():
+            print("OK")
             filled_form.save()
             note = "Thank You for Entering Information"
             new_form = FamilyEntry()
@@ -99,14 +105,23 @@ def authenticate(request):
         note = "Please Enter the login credentials"
         return render(request, 'authenticate.html', {'note': note})
 
-def acknowledgement(request):
+def imagesupload(request):
     if request.method=='POST':
-        filled_form = FamilyData(request.POST)
+        filled_form = ImagesUpload(request.POST, request.FILES)
         if filled_form.is_valid():
             filled_form.save()
-            note = "Thank You for Entering Information"
-            new_form = FamilyData()
-            return render(request,'acknowledgement.html',{'familydata':new_form,'note':note})
+            note = "Thank You for Uploading!"
+            newform = ImagesUpload()
+            return render(request, 'imagesupload.html', {'note': note, 'form': newform})
+
+def acknowledgement(request):
+    if request.method=='POST':
+        filled_form = FamilyData(request.POST, request.FILES)
+        if filled_form.is_valid():
+            filled_form.save()
+            note = "Thank You for Entering Information. Click the Following button to upload multiple images of the person"
+            newform = ImagesUpload()
+            return render(request,'imagesupload.html',{'note':note, 'form':newform})
 
 def edit_database(request, id):
     note = "Edit the Following Information"
@@ -116,7 +131,10 @@ def edit_database(request, id):
         filled_form = FamilyData(request.POST,instance = member)
         if filled_form.is_valid():
             filled_form.save()
-            note = "Thank You for Entering Information"
+            note = "Thank You for Entering Information!! The Database has been updated!!"
+            newform = ImagesUpload()
+            return render(request,'imagesupload.html',{'note':note, 'form':newform})
+
     return render(request, 'edit.html', {'familydata': form, 'note': note, 'member':member})
 
 def treeedit_database(request, id):
@@ -253,6 +271,7 @@ def delete(request):
     else:
         note = "Please Enter the id of the member to be deleted"
         return render(request, 'deletedata.html', {'note': note})
+
 def displaytree(a,b,c):
     if b not in c and b!="Void" and b!="void":
         c.append(b)

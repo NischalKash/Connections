@@ -7,7 +7,7 @@ class Tree(models.Model):
     loginname = models.CharField(max_length=100,unique=True,default='abc')
     password = models.CharField(max_length=100,default='abc')
     familyname = models.CharField(max_length=100)
-    linkingimage = models.CharField(max_length=120, default="na.jpeg", editable=True)
+    linkingimage = models.ImageField(upload_to='images/')
     email_address = models.CharField(max_length=100,default="abc@abc.com", editable=True)
 
     def __str__(self):
@@ -25,8 +25,7 @@ class Family(models.Model):
     spousename = models.CharField(max_length=100)
     sex = models.CharField(choices = SEX_CHOICES, max_length = 1,blank=True)
     age = models.IntegerField(null = True)
-    linkimage = models.CharField(max_length=120,default = "na.jpeg",editable = True)
-    otherimages = models.CharField(max_length=300,default = "na.jpeg",editable=True)
+    linkimage = models.ImageField(upload_to='images/')
     globalid = models.CharField(max_length=100,editable=True,default='1')
 
     def __str__(self):
@@ -38,3 +37,7 @@ class Child(models.Model):
 
     def __str__(self):
          return self.childid.name
+
+class Images(models.Model):
+    globalid = models.ForeignKey('Family',on_delete=models.CASCADE,related_name='globalidentification')
+    images = models.ImageField(upload_to='images/')

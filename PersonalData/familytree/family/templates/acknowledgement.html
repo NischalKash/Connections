@@ -49,7 +49,7 @@
 
   <div class="container"></div>
 <h1>{{ note }}</h1>
-<form action="{% url 'acknowledgement' %}" method = "post">
+<form action="{% url 'acknowledgement' %}" method = "post" enctype="multipart/form-data">
     {% csrf_token %}
     {% for field in familydata %}
         <div class="form-group">

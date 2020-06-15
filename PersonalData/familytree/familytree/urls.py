@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^familyentry',views.familyentry,name='familyentry'),
     url(r'^displayfamily/(\d+)/',views.displayfamily, name = 'displayfamily'),
     url(r'^display', views.display, name='display'),
+    url(r'^imagesupload', views.imagesupload, name='imagesupload'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)

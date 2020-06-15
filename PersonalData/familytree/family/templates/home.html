@@ -90,7 +90,7 @@
   <section class="jumbotron text-center">
     <div class="container">
       <h1>La Familia</h1>
-        <img src = "{% static link %}" height = 600 ></img>
+        <img src = "{{ link.url }}" height = 600 ></img>
         <p class="lead text-muted"><b>When we have each other, we have everything!!</b></p>
       <p>
         <a href="{{ email }}" class="btn btn-primary my-2">Email me</a>
@@ -104,7 +104,7 @@
           {% for fam in family.all %}
         <div class="col-md-3">
           <div class="card mb-2 shadow-sm">
-                <img src = "{% static fam.linkimage %}" height = 350/>
+                <img src = "{{ fam.linkimage.url }}" height = 350/>
             <div class="card-body">
              <a href = "{% url 'fam_detail' fam.id%}" style="color:black;">
                  <h2>
